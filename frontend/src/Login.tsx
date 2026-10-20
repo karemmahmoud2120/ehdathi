@@ -1,4 +1,5 @@
 ﻿import { useState } from 'react';
+import { login, register } from './api';
 
 export default function Login({ onLogin }: { onLogin: (user: any, token: string) => void }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,21 +11,14 @@ export default function Login({ onLogin }: { onLogin: (user: any, token: string)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-    const body = isLogin ? { email, password } : { name, email, password };
-
     try {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      const data = await res.json();
+      const body = isLogin ? { email, password } : { name, email, password };
+      const res = isLogin ? await login(body) : await register(body);
       
-      if (!res.ok) throw new Error(data.message || 'حدث خطأ');
+      if (!res.ok) throw new Error(res.data.message || 'حدث خطأ في البيانات');
       
-      localStorage.setItem('token', data.token);
-      onLogin(data.user, data.token);
+      localStorage.setItem('token', res.data.token);
+      onLogin(res.data.user, res.data.token);
     } catch (err: any) {
       setError(err.message);
     }
