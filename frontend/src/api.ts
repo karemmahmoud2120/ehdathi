@@ -1,4 +1,4 @@
-﻿const API_URL = '';
+﻿const API_URL = (import.meta as any).env.VITE_API_URL || '';
 
 export async function transformPoints(s: number, t: number, p: any[]) {
   const r = await fetch(`${API_URL}/api/transform`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ sourceSrid: s, targetSrid: t, points: p }) });
