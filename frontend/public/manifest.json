@@ -1,0 +1,21 @@
+{
+  "name": "إحداثي - نظام المعلومات الجغرافية",
+  "short_name": "إحداثي",
+  "description": "منصة مصرية احترافية لنظم المعلومات الجغرافية",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0F172A",
+  "theme_color": "#D4AF37",
+  "lang": "ar",
+  "dir": "rtl",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
